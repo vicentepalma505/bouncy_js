@@ -28,7 +28,7 @@ let canvas;
 let context;
 let boing;
 let start;
-let speed = 100;
+let global_speed = 100;
 let paused;
 let muted;
 
@@ -56,7 +56,7 @@ function checkForCollision(balls) {
 }
 
 
-function step(timestamp, radius = 69, speed = 100, x, y, dx = speed, dy = speed, dirx = 1, diry = 1, color = "red") {
+function step(timestamp, radius = 69, speed = global_speed, x, y, dx = speed, dy = speed, dirx = 1, diry = 1, color = "red") {
     if (start === undefined) {
         start = timestamp;
     }
@@ -115,8 +115,8 @@ function step(timestamp, radius = 69, speed = 100, x, y, dx = speed, dy = speed,
     balls.push({
         x: radius + 10,
         y: radius + 10,
-        dx: speed,
-        dy: speed, 
+        dx: global_speed,
+        dy: global_speed, 
         dirx: 1,
         diry: 1,
         radius: radius,
@@ -127,8 +127,8 @@ function step(timestamp, radius = 69, speed = 100, x, y, dx = speed, dy = speed,
     balls.push({
         x: radius + 1000, // Separadas un poco para que no se superpongan exactamente
         y: radius + 10,
-        dx: speed,
-        dy: speed,
+        dx: global_speed,
+        dy: global_speed,
         dirx: -1, // Dirección opuesta para ver el rebote cruzado
         diry: 1,
         radius: radius,
@@ -146,16 +146,17 @@ function step(timestamp, radius = 69, speed = 100, x, y, dx = speed, dy = speed,
             muted = !muted;
         }
         if (e.key === '+') {
-            if (speed < 1000) speed += 20;
+            if (global_speed < 1000) global_speed += 20;
+            console.log(global_speed);
         }
         if (e.key === '-') {
-            if (speed > 20) speed -= 20;
+            if (global_speed > -1000) global_speed -= 20;
+            console.log(global_speed);
         }
     });
 
-    //let ball1 = step(undefined, radius, speed, x1, y1, dx1, dy1, dirx1, diry1);
+
     window.requestAnimationFrame(step);
 
-    //let ball2 = step(undefined, radius, speed, x2, y2, dx2, dy2, dirx2, diry2, color2);
-    //window.requestAnimationFrame(ball2);
+
 })();
