@@ -107,7 +107,7 @@ function step(timestamp, radius = 69, speed = global_speed, x, y, dx = speed, dy
 (() => {
     canvas = document.getElementById("game");
     context = canvas.getContext("2d");
-    boing = new Audio("boing.mp3");
+    boing = new Audio("assets/boing.mp3");
     let radius = 69;
 
 
